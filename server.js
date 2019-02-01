@@ -24,7 +24,6 @@ const typeDefs = fs.readFileSync('./schema.graphql', {encoding: 'utf-8'});
 const resolvers = require('./resolvers');
 
 const server = new ApolloServer({
-  cors: false,
   typeDefs,
   resolvers
 });
@@ -35,7 +34,7 @@ app.listen({ port }, () =>
 )
 
 app.post('/login', (req, res) => {
-  console.log("body is ", req.body);
+  const {email, password} = req.body;
 
   const user = db.users.list().find((user) => user.email === email);
   if (!(user && user.password === password)) {
