@@ -1,0 +1,20 @@
+[
+  {
+    "id": "BJrp-DudG",
+    "email": "alice@facegle.io",
+    "password": "alice123",
+    "companyId": "HJRa-DOuG"
+  },
+  {
+    "id": "ry9pbwdOz",
+    "email": "bob@goobook.co",
+    "password": "bob123",
+    "companyId": "SJV0-wdOM"
+  },
+  {
+    "id": "ry9pbwaki",
+    "email": "ramky.iyer@yahoo.com",
+    "password": "test123456",
+    "companyId": "SJV1-rs8H"
+  }
+]
