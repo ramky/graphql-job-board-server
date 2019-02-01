@@ -6,10 +6,13 @@
     "start": "nodemon --ignore data/ server.js"
   },
   "dependencies": {
+    "apollo-server-express": "^2.3.3",
     "body-parser": "1.18.2",
     "cors": "2.8.4",
     "express": "4.16.3",
     "express-jwt": "5.3.1",
+    "graphql": "^14.1.1",
+    "graphql-tools": "^4.0.4",
     "jsonwebtoken": "8.2.0",
     "notarealdb": "0.2.2"
   },
