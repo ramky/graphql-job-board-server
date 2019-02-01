@@ -1,5 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server-express');
 const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const expressJwt = require('express-jwt');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
@@ -9,11 +11,22 @@ const port = 9000;
 const jwtSecret = Buffer.from('Zn8Q5tyZ/G1MHltc4F/gTkVJMlrbKiZt', 'base64');
 
 const app = express();
+app.use(
+  cors(),
+  bodyParser.json(),
+  expressJwt({
+    secret: jwtSecret,
+    credentialsRequired: false
+  })
+);
+
 const typeDefs = fs.readFileSync('./schema.graphql', {encoding: 'utf-8'});
 const resolvers = require('./resolvers');
 
 const server = new ApolloServer({
-  typeDefs, resolvers
+  cors: false,
+  typeDefs,
+  resolvers
 });
 server.applyMiddleware({ app });
 
@@ -21,6 +34,17 @@ app.listen({ port }, () =>
   console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
 )
 
+app.post('/login', (req, res) => {
+  console.log("body is ", req.body);
+
+  const user = db.users.list().find((user) => user.email === email);
+  if (!(user && user.password === password)) {
+    res.sendStatus(401);
+    return;
+  }
+  const token = jwt.sign({sub: user.id}, jwtSecret);
+  res.send({token});
+});
 
 //=====
 
